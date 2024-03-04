@@ -1,0 +1,16 @@
+height 250
+offsetx 108
+offsety 115
+scale 3
+width 250
+health 100
+attacks 1 5
+collisionx 81
+collisiony 156
+idle 8
+jump 2
+death 7
+run 8
+hit 3
+attack1 8
+attack2 8

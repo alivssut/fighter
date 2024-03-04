@@ -5,6 +5,7 @@ from selectFighter import SelectFighter
 from tile import Tile
 from sprites import SpriteInfo
 
+pygame.font.init()
 screen = pygame.display.set_mode((settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT))
 
 bg = pygame.image.load(f"./{settings.BACKGROUNDS_DIR}bg.png").convert() 

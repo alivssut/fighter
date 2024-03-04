@@ -9,8 +9,8 @@ class Game:
     def __init__(self, screen, selectFighter, tile_list, sprite_info, background, font) -> None:
         self.fighter_1 = None
         self.fighter_1 = None
-        self.main_menu = Menu(["Start Game", "Quit"])
-        self.menu = Menu(["Restart", "Select fighter", "Main menu"])
+        self.main_menu = Menu(screen=screen, menu_options=["Start Game", "Quit"])
+        self.menu = Menu(screen=screen, menu_options=["Restart", "Select fighter", "Main menu"], focus_color=(120, 100, 50), option_color=(0, 0, 0))
         self.page = 0
         self.tile_list = tile_list
         self.selectFighter = selectFighter

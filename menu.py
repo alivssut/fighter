@@ -1,27 +1,16 @@
 import pygame
-import sys
-
-pygame.init()
-
-# Set up the window
-width, height = 1000, 700
-screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Menu Screen")
-
-# Set up colors
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-GRAY = (128, 128, 128)
-
-# Set up fonts
-font = pygame.font.Font(None, 36)
+import settings
 
 class Menu:
-    def __init__(self, menu_options) -> None:
+    def __init__(self, screen, menu_options, focus_color=(255, 255, 255), option_color=(128, 128, 128)) -> None:
+        pygame.font.init()
         self.selected = -1
         self.selected_option = 0
         self.is_on = True
+        self.focus_color = focus_color
+        self.option_color = option_color
         self.menu_options = menu_options
+        self.screen = screen
         self.font = pygame.font.Font(None, 36)
 
     def move(self):
@@ -35,16 +24,9 @@ class Menu:
                     self.selected_option = (self.selected_option + 1) % len(self.menu_options)
                 elif event.key == pygame.K_RETURN:
                     self.selected = self.selected_option
-                    # if self.selected_option == 0:
-                    #     print("Starting the game...")
-                    # elif self.selected_option == 1:
-                    #     print("Opening options...")
-                    # elif self.selected_option == 1:
-                    #     pygame.quit()
-                    #     sys.exit()
 
     def draw(self):
         for i, option in enumerate(self.menu_options):
-            text = self.font.render(option, True, WHITE if i == self.selected_option else GRAY)
-            text_rect = text.get_rect(center=(width // 2, height // 2 + i * 50))
-            screen.blit(text, text_rect)
+            text = self.font.render(option, True, self.focus_color if i == self.selected_option else self.option_color)
+            text_rect = text.get_rect(center=(settings.SCREEN_WIDTH // 2, settings.SCREEN_HEIGHT // 2 + i * 50))
+            self.screen.blit(text, text_rect)

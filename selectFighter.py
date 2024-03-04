@@ -55,13 +55,13 @@ class SelectFighter:
 
         size = settings.SCREEN_WIDTH//3//self.column
         font = pygame.font.SysFont('Comic Sans MS', 30)
-        font2 = pygame.font.SysFont('Comic Sans MS', 20)
+        font2 = pygame.font.SysFont('Comic Sans MS', 15)
         player1_name_surface = font.render(f'P1: {self.fighters_name[self.selected_option_1]}', False, self.player1_color)
         player2_name_surface = font.render(f'P2: {self.fighters_name[self.selected_option_2]}', False, self.player2_color)
         surface.blit(player1_name_surface, (0,0))
         surface.blit(player2_name_surface, (settings.SCREEN_WIDTH//3 * 2,0))
-        surface.blit(font2.render(f'(Enter for select)', False, self.player1_color), (0,30))
-        surface.blit(font2.render(f'(Space for select)', False, self.player2_color), (settings.SCREEN_WIDTH//3 * 2,30))
+        surface.blit(font2.render(f'(ENTER for select and BACKSPACE for deselect)', False, self.player1_color), (0,35))
+        surface.blit(font2.render(f'(SPACE for select and ESCAPE for deselect)', False, self.player2_color), (settings.SCREEN_WIDTH//3 * 2,35))
 
         for images in self.fighters_images:
             x = (settings.SCREEN_WIDTH // 3) + (i * size)

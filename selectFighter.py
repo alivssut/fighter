@@ -26,30 +26,26 @@ class SelectFighter:
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
+                if event.key == pygame.K_LEFT and self.player1_done == False:
                     self.selected_option_1 = (self.selected_option_1 - 1) % len(self.fighters_name)
                     self.selected_option_name_1 = self.fighters_name[self.selected_option_1]
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_RIGHT and self.player1_done == False:
                     self.selected_option_1 = (self.selected_option_1 + 1) % len(self.fighters_name)
                     self.selected_option_name_1 = self.fighters_name[self.selected_option_1]
-                elif event.key == pygame.K_UP:
-                    self.selected_option_1 = (self.selected_option_1 - 5) % len(self.fighters_name)
-                    self.selected_option_name_1 = self.fighters_name[self.selected_option_1]
-                elif event.key == pygame.K_DOWN:
-                    self.selected_option_1 = (abs(self.selected_option_1 + 5)) % len(self.fighters_name)
-                    self.selected_option_name_1 = self.fighters_name[self.selected_option_1]
-                elif event.key == pygame.K_a:
+                elif event.key == pygame.K_a and self.player2_done == False:
                     self.selected_option_2 = (self.selected_option_2 - 1) % len(self.fighters_name)
                     self.selected_option_name_2 = self.fighters_name[self.selected_option_2]
-                elif event.key == pygame.K_d:
+                elif event.key == pygame.K_d and self.player2_done == False:
                     self.selected_option_2 = (self.selected_option_2 + 1) % len(self.fighters_name)
                     self.selected_option_name_2 = self.fighters_name[self.selected_option_2]
                 elif event.key == pygame.K_RETURN:
                     self.player1_done = True
                 elif event.key == pygame.K_SPACE:
                     self.player2_done = True
-                elif event.key == pygame.K_ESCAPE:
-                    pass
+                elif event.key == pygame.K_BACKSPACE and self.is_complete == False:
+                    self.player1_done = False
+                elif event.key == pygame.K_ESCAPE and self.is_complete == False:
+                    self.player2_done = False
 
         if self.player1_done and self.player2_done:
             self.is_complete = True
@@ -78,8 +74,12 @@ class SelectFighter:
                 j += 1
 
         img = self.fighters_images[self.selected_option_1][0].get_rect(center=(75, 250))
+        if self.player1_done:
+            surface.blit(font2.render(f'DONE', False, self.player1_color), (0,settings.SCREEN_HEIGHT - 30))
         surface.blit(pygame.transform.scale(self.fighters_images[self.selected_option_1][0], (200, 300)), img)
         img = self.fighters_images[self.selected_option_2][0].get_rect(center=(775, 250))
+        if self.player2_done:
+            surface.blit(font2.render(f'DONE', False, self.player1_color), (settings.SCREEN_WIDTH//3 * 2,settings.SCREEN_HEIGHT - 30))
         surface.blit(pygame.transform.flip(pygame.transform.scale(self.fighters_images[self.selected_option_2][0], (200, 300)), True, False), img)
         
         pygame.draw.rect(surface, self.player1_color, pygame.Rect(settings.SCREEN_WIDTH // 3 + (self.selected_option_1%self.column) * size, self.fighters_selectlist_yoffset + self.selected_option_1//self.column * size, size, size),  3)
